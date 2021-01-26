@@ -6,6 +6,6 @@ const app = express();
 app.set('port', process.env.PORT || 4000);
 app.use(morgan('dev'));
 
-app.use(require('./routes/employees.route'));
+app.use("api/employees", require('./routes/employees.route.js'));
 
 module.exports = app;
