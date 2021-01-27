@@ -1,19 +1,19 @@
 const employeesCtrl = {};
 
 employeesCtrl.getEmployes = (req, res) => {
-    res.send('get employees');
-};
+    res.send('get employees')
+}
 employeesCtrl.createEmployee = (req, res) => {
-    res.send('create employee');
-};
+    res.send('create employee')
+}
 employeesCtrl.getEmployee = (req, res) => {
-    res.send('get employee');
-};
+    res.send('get employee')
+}
 employeesCtrl.updateEmployee = (req, res) => {
-    res.send('update employee');
-};
+    res.send('update employee')
+}
 employeesCtrl.deleteEmployee = (req, res) => {
-    res.send('delete employee');
-};
+    res.send('delete employee')
+}
 
-module.exports = employeesCtrl;
+module.exports = employeesCtrl
