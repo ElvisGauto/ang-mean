@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const router = Router()
 
-const employesController = require('../controllers/employees.controller.js')
+const employesController = require('../controllers/employees.controller')
 
 // CRUD
 // CREATE - READ - UPDATE - DELETE
