@@ -12,14 +12,17 @@ employeesCtrl.createEmployee = async (req, res) => {
     await newEmployee.save();
     res.send({message: 'employee created'})
 }
-employeesCtrl.getEmployee = (req, res) => {
-    res.send('get employee')
+employeesCtrl.getEmployee = async (req, res) => {
+    const employee = await Employee.findById(req.params.id)
+    res.send(employee)
 }
-employeesCtrl.updateEmployee = (req, res) => {
-    res.send('update employee')
+employeesCtrl.updateEmployee = async (req, res) => {
+    await Employee.findByIdAndUpdate(req.params.id, req.body)
+    res.send({message: 'employee updated'})
 }
-employeesCtrl.deleteEmployee = (req, res) => {
-    res.send('delete employee')
+employeesCtrl.deleteEmployee = async (req, res) => {
+    await Employee.findByIdAndDelete(req.params.id)
+    res.send({message: 'employee deleted'})
 }
 
 module.exports = employeesCtrl

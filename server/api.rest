@@ -8,9 +8,25 @@ POST http://localhost:9000/api/employees
 Content-Type: application/json
 
 {
-    "name":"elvis",
-    "position": "trainee dev.",
-    "office": "seven floor",
-    "salary": "26000"
-    
+    "name":"addbul",
+    "position": "jr dev.",
+    "office": "six floor",
+    "salary": "40000"
 }
+
+###
+
+GET http://localhost:9000/api/employees/60137b2e16401507508639c4
+
+
+###
+PUT http://localhost:9000/api/employees/60137a4316401507508639c3
+Content-Type: application/json
+
+{
+    "position": "jr dev.",
+    "salary": "40000"
+}
+
+###
+DELETE http://localhost:9000/api/employees/60137b2e16401507508639c4
