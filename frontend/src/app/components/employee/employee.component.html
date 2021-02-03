@@ -1,1 +1,27 @@
-<p>employee works!</p>
+<div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h1>Formulario</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tr *ngFor="let employee of employeeArr">
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.position }}</td>
+                <td>{{ employee.office }}</td>
+                <td>{{ employee.salary }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
