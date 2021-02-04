@@ -3,6 +3,25 @@
         <div class="card">
             <div class="card-body">
                 <h1>Formulario</h1>
+                <form [formGroup]="employeeForm">
+                    <div>
+                        <label>Nombre</label>
+                        <input type="text" formControlName="name">
+                    </div>
+                    <div>
+                        <label for="">Posicion</label>
+                        <input type="text" formControlName="position">
+                    </div>
+                    <div>
+                        <label for="">Oficina</label>
+                        <input type="text" formControlName="office">
+                    </div>
+                    <div>
+                        <label for="">Sueldo</label>
+                        <input type="number" formControlName="salary">
+                    </div>
+                    <button (click)="submitEmployees()">Cargar</button>
+                </form>
             </div>
         </div>
     </div>

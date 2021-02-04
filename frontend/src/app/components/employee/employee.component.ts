@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../../services/employee.service';
 
 import { Employee } from '../../models/employee.model';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-employee',
@@ -10,7 +10,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./employee.component.scss']
 })
 export class EmployeeComponent implements OnInit {
-  employeeForm: FormGroup[] = [];
+  employeeForm: FormGroup;
   employeeArr: Employee[] = [];
 
   constructor(
@@ -22,6 +22,14 @@ export class EmployeeComponent implements OnInit {
     this.getEmployees();
     this.generateEmployeeForm();
   }
+  generateEmployeeForm(): void {
+    this.employeeForm = this.fb.group({
+      name: ['', Validators.required],
+      position: ['', Validators.required],
+      office: ['', Validators.required],
+      salary: ['', Validators.required]
+    });
+  }
 
   getEmployees(): void {
     this.employeeService.getEmployees$().subscribe(data => {
@@ -29,13 +37,10 @@ export class EmployeeComponent implements OnInit {
     });
   }
 
-  generateEmployeeForm(): void {
-    // this.employeeForm  = this.fb.group({
-    //   name: '',
-    //   position: '',
-    //   office: '',
-    //   salary: ''
-    // });
+  submitEmployees(): any {
+    // console.log(this.employeeForm.value);
+    this.employeeService.submitEmployees$(this.employeeForm.value);
   }
+
 
 }
