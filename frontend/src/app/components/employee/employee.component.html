@@ -1,26 +1,33 @@
-<div>
+<div class="row">
     <div class="col-md-4">
         <div class="card">
             <div class="card-body">
-                <h1>Formulario</h1>
-                <form [formGroup]="employeeForm">
-                    <div>
-                        <label>Nombre</label>
-                        <input type="text" formControlName="name">
+                <form #employeeForm="ngForm" (ngSubmit)="addEmployee(employeeForm)">
+                    <input type="hidden" name="_id"
+                    [(ngModel)]="employeeService.selectedEmployee._id">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="name"
+                        [(ngModel)]="employeeService.selectedEmployee.name" placeholder="Enter your full name">
                     </div>
-                    <div>
-                        <label for="">Posicion</label>
-                        <input type="text" formControlName="position">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="position"
+                        [(ngModel)]="employeeService.selectedEmployee.position" placeholder="Enter your position">
                     </div>
-                    <div>
-                        <label for="">Oficina</label>
-                        <input type="text" formControlName="office">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="office"
+                        [(ngModel)]="employeeService.selectedEmployee.office" placeholder="Enter your office">
                     </div>
-                    <div>
-                        <label for="">Sueldo</label>
-                        <input type="number" formControlName="salary">
+                    <div class="form-group">
+                        <input type="number" class="form-control" name="salary"
+                        [(ngModel)]="employeeService.selectedEmployee.salary" placeholder="Enter your salary">
                     </div>
-                    <button (click)="submitEmployees()">Cargar</button>
+
+                    <button class="btn btn-primary mr-2" (click)="resetForm(employeeForm)">
+                        Clean
+                    </button>
+                    <button class="btn btn-secondary">
+                        Save
+                    </button>
                 </form>
             </div>
         </div>
@@ -40,6 +47,14 @@
                 <td>{{ employee.position }}</td>
                 <td>{{ employee.office }}</td>
                 <td>{{ employee.salary }}</td>
+                <td>
+                    <button class="btn btn-secondary btn-sm" (click)="updateEmployee(employee)">
+                        <i class="material-icons">edit</i>
+                    </button>
+                    <button class="btn btn-danger btn-sm" (click)="deleteEmployee(employee._id)">
+                        <i class="material-icons">delete</i>
+                    </button>
+                </td>
             </tr>
         </table>
     </div>

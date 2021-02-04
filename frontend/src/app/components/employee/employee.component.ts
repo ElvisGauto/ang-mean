@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../../services/employee.service';
 
 import { Employee } from '../../models/employee.model';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-employee',
@@ -10,25 +11,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./employee.component.scss']
 })
 export class EmployeeComponent implements OnInit {
-  employeeForm: FormGroup;
   employeeArr: Employee[] = [];
 
   constructor(
-    private employeeService: EmployeeService,
-    private fb: FormBuilder
+    public employeeService: EmployeeService
   ) { }
 
   ngOnInit(): void {
     this.getEmployees();
-    this.generateEmployeeForm();
-  }
-  generateEmployeeForm(): void {
-    this.employeeForm = this.fb.group({
-      name: ['', Validators.required],
-      position: ['', Validators.required],
-      office: ['', Validators.required],
-      salary: ['', Validators.required]
-    });
   }
 
   getEmployees(): void {
@@ -37,18 +27,43 @@ export class EmployeeComponent implements OnInit {
     });
   }
 
-  submitEmployees(): void {
-    // tslint:disable-next-line:no-debugger
-    debugger;
-    // console.log(this.employeeForm.value);
-    this.employeeService.submitEmployees$(this.employeeForm.value).subscribe(
-      (res: any) => {
-        console.log(res);
+  addEmployee(form: NgForm) {
+    if (form.value._id) {
+      this.employeeService.updateEmployee$(form.value).subscribe(
+        (res: any) => { 
+          this.getEmployees();
+          form.reset();
+        },
+        (err: any) => console.log(err)
+      );
+    } else {
+      this.employeeService.createEmployees$(form.value).subscribe(
+        (res: any) => { 
+          this.getEmployees();
+          form.reset();
+        },
+        (err: any) => console.log(err)
+      );
+    }
+  }
+
+  deleteEmployee(id: any) {
+    this.employeeService.deleteEmployee$(id).subscribe(
+      () => {
         this.getEmployees();
       },
-      (err: any) => console.log(err)
+      (err: any) => {
+        console.log(err);
+      }
     );
   }
 
+  updateEmployee(employee: Employee) {
+    this.employeeService.selectedEmployee = employee;
+  }
+
+  resetForm(form: NgForm) {
+    form.reset();
+  }
 
 }

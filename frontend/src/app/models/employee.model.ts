@@ -3,4 +3,5 @@ export interface Employee {
     position: string;
     office: string;
     salary: number;
+    _id?: string;
 }
