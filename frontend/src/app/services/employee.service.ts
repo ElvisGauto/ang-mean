@@ -8,7 +8,7 @@ import { Employee } from '../models/employee.model';
 })
 export class EmployeeService {
 
-  URL_API = 'http://localhost:9000/api/employees';
+  URL_API = 'http://localhost:9000/api/employees/';
 
   constructor(
     private http: HttpClient

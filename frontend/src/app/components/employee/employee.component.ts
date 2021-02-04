@@ -37,9 +37,17 @@ export class EmployeeComponent implements OnInit {
     });
   }
 
-  submitEmployees(): any {
+  submitEmployees(): void {
+    // tslint:disable-next-line:no-debugger
+    debugger;
     // console.log(this.employeeForm.value);
-    this.employeeService.submitEmployees$(this.employeeForm.value);
+    this.employeeService.submitEmployees$(this.employeeForm.value).subscribe(
+      (res: any) => {
+        console.log(res);
+        this.getEmployees();
+      },
+      (err: any) => console.log(err)
+    );
   }
 
 
